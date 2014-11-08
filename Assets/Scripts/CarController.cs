@@ -5,6 +5,7 @@ using Pose = Thalmic.Myo.Pose;
 public class CarController : MonoBehaviour {
 
 
+
 	float timer =0f;
 	Vector3 startPos;
 	Quaternion startRot;
@@ -60,12 +61,15 @@ public class CarController : MonoBehaviour {
 	{
 		if(car!=null)
 		{
+
 			if(carMoveScript.moving == false)
 			{
+
 				if(!isCarSet)
-				{
-					isCarSet = true;
+				{ print (4);
 					setCars();
+					isCarSet = true;
+
 				}
 				DetectInput();
 				MoveCars();
@@ -76,17 +80,18 @@ public class CarController : MonoBehaviour {
 
 	void DetectInput()
 	{
+		print (3);
 		ThalmicMyo thalmicMyo = myo.GetComponent<ThalmicMyo> ();
-		if (thalmicMyo.pose == _lastPose) {
-			return;
-		}
+//		if (thalmicMyo.pose == _lastPose) {
+//			return;
+//		}
 		_lastPose = thalmicMyo.pose;
-		if (thalmicMyo.pose == Pose.WaveIn  ) //left
+		if (/*thalmicMyo.pose == Pose.WaveIn ||*/ Input.GetKeyDown(KeyCode.LeftArrow) ) //left
 		{
 			print (3);
 			moveDirection = "left";
 		}
-		if (thalmicMyo.pose == Pose.WaveOut ) //right
+		if (/*thalmicMyo.pose == Pose.WaveOut ||*/ Input.GetKeyDown(KeyCode.RightArrow)) //right
 		{
 			print (4);
 			moveDirection = "right"; 
@@ -112,13 +117,14 @@ public class CarController : MonoBehaviour {
 				car.transform.position = Vector3.Lerp(startPos, startPos+ new Vector3(-3*carMoveScript.isFacingLeft, 0, 5) , timer);
 				car.transform.rotation = Quaternion.Slerp(startRot, startRot * new Quaternion(0,0.7f*carMoveScript.isFacingLeft,0,0.7f) , timer);
 			}
-			else if(timer>=1f && timer<2f)
+			else if(timer>=1f && timer<3f)
 			{
 				transform.position += new Vector3(0,0, timer);
 			}
-			else if(timer>2f)
+			else if(timer>3f)
 			{
 				moveDirection = "";
+				Destroy(this);
 			}
 		}
 		else if(moveDirection == "right")
@@ -130,11 +136,11 @@ public class CarController : MonoBehaviour {
 				car.transform.position = Vector3.Lerp(startPos, startPos+ new Vector3(-3*carMoveScript.isFacingLeft, 0, -5) , timer);
 				car.transform.rotation = Quaternion.Slerp(startRot, startRot * new Quaternion(0,-0.7f*carMoveScript.isFacingLeft,0,0.7f) , timer);
 			}
-			else if(timer>=1f && timer<2f)
+			else if(timer>=1f && timer<3f)
 			{
 				transform.position += new Vector3(0,0, -timer);
 			}
-			else if(timer>2f)
+			else if(timer>3f)
 			{
 				moveDirection = "";
 			}

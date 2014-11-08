@@ -3,7 +3,8 @@ using System.Collections;
 
 public class CarMovement : MonoBehaviour {
 
-	public float speed =3f ;
+	float speed =3f;
+	public float stopPoint ;
 	public int isFacingLeft = 1;
 
 	//public CarController controller;
@@ -24,14 +25,15 @@ public class CarMovement : MonoBehaviour {
 
 	void Move()
 	{
-		if(transform.localPosition.x * isFacingLeft >0 )
+		if(transform.position.x *isFacingLeft >stopPoint )
 		{
 			moving = true;
-			transform.localPosition -= new Vector3(Time.deltaTime*3 *isFacingLeft,0, 0);
+			transform.position -= new Vector3(Time.deltaTime*3 *isFacingLeft*speed,0, 0);
 		}
-		else if(transform.localPosition.x * isFacingLeft<=0)
+		else if(transform.position.x *isFacingLeft<= stopPoint)
 		{
 			//set the controller
+			print ("stop car");
 			moving = false;
 		}
 	}

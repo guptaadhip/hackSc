@@ -61,6 +61,7 @@
      <Compile Include="Assets\Scripts\CarController.cs" />
      <Compile Include="Assets\Scripts\CarMovement.cs" />
      <Compile Include="Assets\Scripts\ColorBoxByPose.cs" />
+     <Compile Include="Assets\Scripts\GameController.cs" />
      <Compile Include="Assets\Scripts\TestMovement.cs" />
      <Compile Include="Assets\TestMovement1.cs" />
      <None Include="Assets\Myo\README-MyoUnity.txt" />
