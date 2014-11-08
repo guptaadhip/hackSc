@@ -98,19 +98,30 @@ public class CarController : MonoBehaviour {
 	{
 
 		ThalmicMyo thalmicMyo = myo.GetComponent<ThalmicMyo> ();
-//		if (thalmicMyo.pose == _lastPose) {
-//			return;
-//		}
+		if (thalmicMyo.pose == _lastPose) {
+			return;
+		}
 		_lastPose = thalmicMyo.pose;
-		if (/*thalmicMyo.pose == Pose.WaveIn ||*/ Input.GetKeyDown(KeyCode.LeftArrow) ) //left
+		if (thalmicMyo.pose == Pose.WaveIn /*|| Input.GetKeyDown(KeyCode.LeftArrow)*/ ) //left
 		{
 
 			moveDirection = "left";
+			if((thalmicMyo.arm.ToString().Equals("Left") && car.name.Equals("CarLeft")) || 
+			   (thalmicMyo.arm.ToString().Equals("Right") && car.name.ToString().Equals("CarRight"))) {
+				print("1");
+				moveDirection = "right";
+			}
+
 		}
-		if (/*thalmicMyo.pose == Pose.WaveOut ||*/ Input.GetKeyDown(KeyCode.RightArrow)) //right
+		if (thalmicMyo.pose == Pose.WaveOut /* || Input.GetKeyDown(KeyCode.RightArrow)*/ ) //right
 		{
 
 			moveDirection = "right"; 
+			if((thalmicMyo.arm.ToString().Equals("Left") && car.name.Equals("CarLeft")) || 
+			   (thalmicMyo.arm.ToString().Equals("Right") && car.name.ToString().Equals("CarRight")) ) {
+				print("2");
+				moveDirection = "left";
+			}
 		}
 		if (thalmicMyo.pose == Pose.FingersSpread) //stop
 		{
@@ -130,7 +141,11 @@ public class CarController : MonoBehaviour {
 			timer+= Time.deltaTime*turnSpeed;
 			if(timer<1f)
 			{
-				car.transform.position = Vector3.Lerp(startPos, startPos+ new Vector3(-13*carMoveScript.isFacingLeft, 0, 5) , timer);
+				if(car.name.Equals("CarLeft"))
+					car.transform.position = Vector3.Lerp(startPos, startPos+ new Vector3(-15*carMoveScript.isFacingLeft, 0, 5) , timer);
+				else if(car.name.Equals("CarRight"))
+					car.transform.position = Vector3.Lerp(startPos, startPos+ new Vector3(-10*carMoveScript.isFacingLeft, 0, 5) , timer);
+
 				car.transform.rotation = Quaternion.Slerp(startRot, startRot * new Quaternion(0,0.7f*carMoveScript.isFacingLeft,0,0.7f) , timer);
 			}
 			else if(timer>=1f && timer<3f)
@@ -149,7 +164,12 @@ public class CarController : MonoBehaviour {
 
 			if(timer<1f)
 			{
-				car.transform.position = Vector3.Lerp(startPos, startPos+ new Vector3(-7*carMoveScript.isFacingLeft, 0, -5) , timer);
+				if(car.name.Equals("CarLeft"))
+					car.transform.position = Vector3.Lerp(startPos, startPos+ new Vector3(-10*carMoveScript.isFacingLeft, 0, -5) , timer);
+				else if(car.name.Equals("CarRight"))
+					car.transform.position = Vector3.Lerp(startPos, startPos+ new Vector3(-14*carMoveScript.isFacingLeft, 0, -5) , timer);
+
+
 				car.transform.rotation = Quaternion.Slerp(startRot, startRot * new Quaternion(0,-0.7f*carMoveScript.isFacingLeft,0,0.7f) , timer);
 			}
 			else if(timer>=1f && timer<3f)
