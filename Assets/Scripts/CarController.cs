@@ -81,12 +81,14 @@ public class CarController : MonoBehaviour {
 			return;
 		}
 		_lastPose = thalmicMyo.pose;
-		if (thalmicMyo.pose == Pose.WaveIn) //left
+		if (thalmicMyo.pose == Pose.WaveIn  ) //left
 		{
+			print (3);
 			moveDirection = "left";
 		}
-		if (thalmicMyo.pose == Pose.WaveOut) //right
+		if (thalmicMyo.pose == Pose.WaveOut ) //right
 		{
+			print (4);
 			moveDirection = "right"; 
 		}
 		if (thalmicMyo.pose == Pose.FingersSpread) //stop
@@ -101,17 +103,18 @@ public class CarController : MonoBehaviour {
 
 	void MoveCars()
 	{
-		if(moveDirection == "left")
+		if(moveDirection == "left" )
 		{
+			print(1);
 			timer+= Time.deltaTime*turnSpeed;
 			if(timer<1f)
 			{
-				car.transform.localPosition = Vector3.Lerp(startPos, startPos+ new Vector3(-5, 0, -3) , timer);
-				car.transform.localRotation = Quaternion.Slerp(startRot, startRot * new Quaternion(0,0.7f,0,0.7f) , timer);
+				car.transform.position = Vector3.Lerp(startPos, startPos+ new Vector3(-3*carMoveScript.isFacingLeft, 0, 5) , timer);
+				car.transform.rotation = Quaternion.Slerp(startRot, startRot * new Quaternion(0,0.7f*carMoveScript.isFacingLeft,0,0.7f) , timer);
 			}
 			else if(timer>=1f && timer<2f)
 			{
-				transform.localPosition -= new Vector3(0,0, timer);
+				transform.position += new Vector3(0,0, timer);
 			}
 			else if(timer>2f)
 			{
@@ -121,14 +124,15 @@ public class CarController : MonoBehaviour {
 		else if(moveDirection == "right")
 		{
 			timer+= Time.deltaTime*turnSpeed;
+			print(2);
 			if(timer<1f)
 			{
-				car.transform.localPosition = Vector3.Lerp(startPos, startPos+ new Vector3(5, 0, -3) , timer);
-				car.transform.localRotation = Quaternion.Slerp(startRot, startRot * new Quaternion(0,-0.7f,0,0.7f) , timer);
+				car.transform.position = Vector3.Lerp(startPos, startPos+ new Vector3(-3*carMoveScript.isFacingLeft, 0, -5) , timer);
+				car.transform.rotation = Quaternion.Slerp(startRot, startRot * new Quaternion(0,-0.7f*carMoveScript.isFacingLeft,0,0.7f) , timer);
 			}
 			else if(timer>=1f && timer<2f)
 			{
-				transform.localPosition -= new Vector3(0,0, timer);
+				transform.position += new Vector3(0,0, -timer);
 			}
 			else if(timer>2f)
 			{
@@ -137,7 +141,7 @@ public class CarController : MonoBehaviour {
 		}
 		else if(moveDirection == "stop")
 		{
-			
+
 		}
 		else if(moveDirection == "forward")
 		{
@@ -149,8 +153,8 @@ public class CarController : MonoBehaviour {
 	{
 		timer = 0f;
 		moveDirection = "";
-		startPos = car.transform.localPosition;
-		startRot = car.transform.localRotation;
+		startPos = car.transform.position;
+		startRot = car.transform.rotation;
 
 	}
 }

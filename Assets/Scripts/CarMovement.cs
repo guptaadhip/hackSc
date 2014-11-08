@@ -4,6 +4,7 @@ using System.Collections;
 public class CarMovement : MonoBehaviour {
 
 	public float speed =3f ;
+	public int isFacingLeft = 1;
 
 	//public CarController controller;
 
@@ -23,12 +24,12 @@ public class CarMovement : MonoBehaviour {
 
 	void Move()
 	{
-		if(transform.localPosition.z>0 )
+		if(transform.localPosition.x * isFacingLeft >0 )
 		{
 			moving = true;
-			transform.localPosition -= new Vector3(0,0, Time.deltaTime*3);
+			transform.localPosition -= new Vector3(Time.deltaTime*3 *isFacingLeft,0, 0);
 		}
-		else if(transform.localPosition.z<=0)
+		else if(transform.localPosition.x * isFacingLeft<=0)
 		{
 			//set the controller
 			moving = false;
