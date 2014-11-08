@@ -116,7 +116,6 @@ Transform:
   - {fileID: 1740506800}
   - {fileID: 150081381}
   m_Father: {fileID: 0}
-  m_RootOrder: 0
 --- !u!1 &150081380
 GameObject:
   m_ObjectHideFlags: 0
@@ -144,7 +143,6 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 86681756}
-  m_RootOrder: 1
 --- !u!114 &150081382
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -158,9 +156,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   armRecognized: 0
-  arm: 1
+  arm: 0
   xDirection: 0
-  pose: 0
+  pose: 65535
   accelerometer: {x: 0, y: 0, z: 0}
   gyroscope: {x: 0, y: 0, z: 0}
 --- !u!1001 &766407047
@@ -200,14 +198,6 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 400004, guid: bd5fb9de2386749819df9bd5c2c4b2fd, type: 2}
       propertyPath: m_RootOrder
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 11400000, guid: bd5fb9de2386749819df9bd5c2c4b2fd, type: 2}
-      propertyPath: arm
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 11400000, guid: bd5fb9de2386749819df9bd5c2c4b2fd, type: 2}
-      propertyPath: pose
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
@@ -282,11 +272,8 @@ Camera:
     m_Bits: 4294967295
   m_RenderingPath: -1
   m_TargetTexture: {fileID: 0}
-  m_TargetDisplay: 0
   m_HDR: 0
   m_OcclusionCulling: 1
-  m_StereoConvergence: 10
-  m_StereoSeparation: .0219999999
 --- !u!4 &913828956
 Transform:
   m_ObjectHideFlags: 0
@@ -298,7 +285,6 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 1
 --- !u!1 &969040278
 GameObject:
   m_ObjectHideFlags: 0
@@ -310,6 +296,7 @@ GameObject:
   - 33: {fileID: 969040281}
   - 135: {fileID: 969040280}
   - 23: {fileID: 969040279}
+  - 114: {fileID: 969040284}
   - 114: {fileID: 969040283}
   m_Layer: 0
   m_Name: Sphere
@@ -317,7 +304,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!23 &969040279
 Renderer:
   m_ObjectHideFlags: 0
@@ -336,8 +323,9 @@ Renderer:
   m_UseLightProbes: 0
   m_LightProbeAnchor: {fileID: 0}
   m_ScaleInLightmap: 1
-  m_SortingLayerID: 0
+  m_SortingLayer: 0
   m_SortingOrder: 0
+  m_SortingLayerID: 0
 --- !u!135 &969040280
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -368,7 +356,6 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 3
 --- !u!114 &969040283
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -377,10 +364,27 @@ MonoBehaviour:
   m_GameObject: {fileID: 969040278}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f2c7a1af8ad624e9caed6b6458847986, type: 3}
+  m_Script: {fileID: 11500000, guid: 59d28a545716649ae8fe08a9485b5dc5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   myo: {fileID: 1740506799}
+--- !u!114 &969040284
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 969040278}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 917262f8ecbe7423583085eb03acfbb0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  armRecognized: 0
+  arm: 1
+  xDirection: 0
+  pose: 65535
+  accelerometer: {x: 0, y: 0, z: 0}
+  gyroscope: {x: 0, y: 0, z: 0}
 --- !u!1 &1278107312
 GameObject:
   m_ObjectHideFlags: 0
@@ -392,6 +396,7 @@ GameObject:
   - 33: {fileID: 1278107316}
   - 65: {fileID: 1278107315}
   - 23: {fileID: 1278107314}
+  - 114: {fileID: 1278107318}
   - 114: {fileID: 1278107313}
   m_Layer: 0
   m_Name: Cube
@@ -408,10 +413,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 1278107312}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 59d28a545716649ae8fe08a9485b5dc5, type: 3}
+  m_Script: {fileID: 11500000, guid: 9ea69127394f343eb92bd3959d1d66da, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  myo: {fileID: 150081380}
+  speed: 3
+  moving: 1
 --- !u!23 &1278107314
 Renderer:
   m_ObjectHideFlags: 0
@@ -430,8 +436,9 @@ Renderer:
   m_UseLightProbes: 0
   m_LightProbeAnchor: {fileID: 0}
   m_ScaleInLightmap: 1
-  m_SortingLayerID: 0
+  m_SortingLayer: 0
   m_SortingOrder: 0
+  m_SortingLayerID: 0
 --- !u!65 &1278107315
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -462,7 +469,20 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 2
+--- !u!114 &1278107318
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1278107312}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 38615991cfb644cceaa8cbb5907a2693, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  turnSpeed: 3
+  car: {fileID: 1278107312}
+  myo: {fileID: 150081380}
 --- !u!1 &1740506799
 GameObject:
   m_ObjectHideFlags: 0
@@ -490,7 +510,6 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 86681756}
-  m_RootOrder: 0
 --- !u!114 &1740506801
 MonoBehaviour:
   m_ObjectHideFlags: 0
