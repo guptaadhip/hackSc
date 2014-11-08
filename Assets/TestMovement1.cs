@@ -2,7 +2,7 @@
 using System.Collections;
 using Pose = Thalmic.Myo.Pose;
 
-public class TestMovement : MonoBehaviour {
+public class TestMovement1 : MonoBehaviour {
 	public GameObject myo = null;
 	private Pose _lastPose = Pose.Unknown;
 	void OnGUI ()
@@ -15,20 +15,20 @@ public class TestMovement : MonoBehaviour {
 		ThalmicMyo thalmicMyo = myo.GetComponent<ThalmicMyo> ();
 		
 		if (!hub.hubInitialized) {
-			GUI.Label(new Rect (12, 8, Screen.width, Screen.height),
+			GUI.Label(new Rect (12, 25, Screen.width, Screen.height),
 			          "Cannot contact Myo Connect. Is Myo Connect running?\n" +
 			          "Press Q to try again."
 			          );
 		} else if (!thalmicMyo.isPaired) {
-			GUI.Label(new Rect (12, 8, Screen.width, Screen.height),
+			GUI.Label(new Rect (12, 25, Screen.width, Screen.height),
 			          "No Myo currently paired."
 			          );
 		} else if (!thalmicMyo.armRecognized) {
-			GUI.Label(new Rect (12, 8, Screen.width, Screen.height),
+			GUI.Label(new Rect (12, 25, Screen.width, Screen.height),
 			          "Perform the Sync Gesture."
 			          );
 		} else {
-			GUI.Label (new Rect (12, 8, Screen.width, Screen.height),
+			GUI.Label (new Rect (12, 25, Screen.width, Screen.height),
 			           "Score: 0"
 			           );
 		}
