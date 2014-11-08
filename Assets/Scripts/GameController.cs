@@ -25,7 +25,7 @@ public class GameController : MonoBehaviour {
 		if (timer_L > gen_timer_L) {
 			//gen car
 
-			print(gen_timer_L);
+
 
 			timer_L = 0f;
 			gen_timer_L = 1.0f + Random.Range(0,45)/10f;
@@ -40,7 +40,7 @@ public class GameController : MonoBehaviour {
 		if (timer_R > gen_timer_R) {
 			//gen car
 			
-			print(gen_timer_R);
+
 			
 			timer_R = 0f;
 			gen_timer_R = 1.0f + Random.Range(0,45)/10f;
@@ -58,5 +58,6 @@ public class GameController : MonoBehaviour {
 	void CreatePrefab(int type)
 	{
 		GameObject clone = Instantiate(carsTypes[type]) as GameObject;
+		clone.name = carsTypes[type].name;
 	}
 }

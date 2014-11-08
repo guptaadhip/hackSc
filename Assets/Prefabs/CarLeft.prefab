@@ -29,10 +29,10 @@ GameObject:
   - 4: {fileID: 400002}
   - 33: {fileID: 3300002}
   - 23: {fileID: 2300002}
+  - 65: {fileID: 6500000}
   - 111: {fileID: 11100000}
   - 114: {fileID: 11400004}
   - 114: {fileID: 11400002}
-  - 65: {fileID: 6500000}
   m_Layer: 0
   m_Name: CarLeft
   m_TagString: Untagged

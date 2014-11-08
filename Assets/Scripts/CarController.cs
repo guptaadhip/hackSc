@@ -39,7 +39,7 @@ public class CarController : MonoBehaviour {
 	{
 		if(myo == null)
 		{
-			print(this.name);
+
 			if(this.name == "CarRight(Clone)")
 				myo = GameObject.Find("Myo2");
 			else if(this.name == "CarLeft(Clone)")
@@ -78,11 +78,11 @@ public class CarController : MonoBehaviour {
 		if(car!=null)
 		{
 
-			if(carMoveScript.moving == false)
+			if(car.transform.position.x *carMoveScript.isFacingLeft<= carMoveScript.stopPoint)
 			{
 
 				if(!isCarSet)
-				{ print (4);
+				{ 
 					setCars();
 					isCarSet = true;
 
@@ -96,7 +96,7 @@ public class CarController : MonoBehaviour {
 
 	void DetectInput()
 	{
-		print (3);
+
 		ThalmicMyo thalmicMyo = myo.GetComponent<ThalmicMyo> ();
 //		if (thalmicMyo.pose == _lastPose) {
 //			return;
@@ -104,12 +104,12 @@ public class CarController : MonoBehaviour {
 		_lastPose = thalmicMyo.pose;
 		if (/*thalmicMyo.pose == Pose.WaveIn ||*/ Input.GetKeyDown(KeyCode.LeftArrow) ) //left
 		{
-			print (3);
+
 			moveDirection = "left";
 		}
 		if (/*thalmicMyo.pose == Pose.WaveOut ||*/ Input.GetKeyDown(KeyCode.RightArrow)) //right
 		{
-			print (4);
+
 			moveDirection = "right"; 
 		}
 		if (thalmicMyo.pose == Pose.FingersSpread) //stop
@@ -126,11 +126,11 @@ public class CarController : MonoBehaviour {
 	{
 		if(moveDirection == "left" )
 		{
-			print(1);
+
 			timer+= Time.deltaTime*turnSpeed;
 			if(timer<1f)
 			{
-				car.transform.position = Vector3.Lerp(startPos, startPos+ new Vector3(-3*carMoveScript.isFacingLeft, 0, 5) , timer);
+				car.transform.position = Vector3.Lerp(startPos, startPos+ new Vector3(-13*carMoveScript.isFacingLeft, 0, 5) , timer);
 				car.transform.rotation = Quaternion.Slerp(startRot, startRot * new Quaternion(0,0.7f*carMoveScript.isFacingLeft,0,0.7f) , timer);
 			}
 			else if(timer>=1f && timer<3f)
@@ -146,10 +146,10 @@ public class CarController : MonoBehaviour {
 		else if(moveDirection == "right")
 		{
 			timer+= Time.deltaTime*turnSpeed;
-			print(2);
+
 			if(timer<1f)
 			{
-				car.transform.position = Vector3.Lerp(startPos, startPos+ new Vector3(-3*carMoveScript.isFacingLeft, 0, -5) , timer);
+				car.transform.position = Vector3.Lerp(startPos, startPos+ new Vector3(-7*carMoveScript.isFacingLeft, 0, -5) , timer);
 				car.transform.rotation = Quaternion.Slerp(startRot, startRot * new Quaternion(0,-0.7f*carMoveScript.isFacingLeft,0,0.7f) , timer);
 			}
 			else if(timer>=1f && timer<3f)

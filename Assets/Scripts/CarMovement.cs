@@ -20,21 +20,38 @@ public class CarMovement : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 	
+
 		Move();
 	}
 
 	void Move()
 	{
-		if(transform.position.x *isFacingLeft >stopPoint )
+		moving = true;
+		RaycastHit hit;
+		if (Physics.Raycast(transform.position, -transform.forward , out hit, 5f))
 		{
-			moving = true;
+			if(hit.transform.name.Contains(gameObject.transform.name))
+			{
+				if((hit.transform.position.x - transform.position.x)*isFacingLeft <1 )
+				{
+
+					moving = false;
+				}
+
+			}
+
+		}
+		
+		if(transform.position.x *isFacingLeft >stopPoint && moving)
+		{
+
 			transform.position -= new Vector3(Time.deltaTime*3 *isFacingLeft*speed,0, 0);
 		}
-		else if(transform.position.x *isFacingLeft<= stopPoint)
-		{
-			//set the controller
-			print ("stop car");
-			moving = false;
-		}
+//		else if(transform.position.x *isFacingLeft<= stopPoint)
+//		{
+//			//set the controller
+//
+//			moving = false;
+//		}
 	}
 }

@@ -868,10 +868,10 @@ GameObject:
   - 4: {fileID: 1226821906}
   - 33: {fileID: 1226821905}
   - 23: {fileID: 1226821904}
+  - 65: {fileID: 1226821907}
   - 111: {fileID: 1226821903}
   - 114: {fileID: 1226821902}
   - 114: {fileID: 1226821901}
-  - 65: {fileID: 1226821907}
   m_Layer: 0
   m_Name: CarRight
   m_TagString: Untagged
@@ -1531,10 +1531,10 @@ GameObject:
   - 4: {fileID: 1795084107}
   - 33: {fileID: 1795084106}
   - 23: {fileID: 1795084105}
+  - 65: {fileID: 1795084108}
   - 111: {fileID: 1795084104}
   - 114: {fileID: 1795084103}
   - 114: {fileID: 1795084102}
-  - 65: {fileID: 1795084108}
   m_Layer: 0
   m_Name: CarLeft
   m_TagString: Untagged
