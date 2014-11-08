@@ -26,10 +26,26 @@ public class CarController : MonoBehaviour {
 		{
 			carMoveScript = car.GetComponent<CarMovement>();
 		}
+		if(myo == null)
+		{
+			if(transform.name == "CarRight")
+				myo = GameObject.Find("Myo2");
+			else if(transform.name == "CarLeft")
+				myo = GameObject.Find("Myo1");
+		}
 	}
 
 	void OnGUI ()
 	{
+		if(myo == null)
+		{
+			print(this.name);
+			if(this.name == "CarRight(Clone)")
+				myo = GameObject.Find("Myo2");
+			else if(this.name == "CarLeft(Clone)")
+				myo = GameObject.Find("Myo1");
+		}
+
 		GUI.skin.label.fontSize = 12;
 		
 		ThalmicHub hub = ThalmicHub.instance;
@@ -124,7 +140,7 @@ public class CarController : MonoBehaviour {
 			else if(timer>3f)
 			{
 				moveDirection = "";
-				Destroy(this);
+				Destroy(gameObject);
 			}
 		}
 		else if(moveDirection == "right")
@@ -140,9 +156,10 @@ public class CarController : MonoBehaviour {
 			{
 				transform.position += new Vector3(0,0, -timer);
 			}
-			else if(timer>3f)
+			else if(timer>=3f)
 			{
 				moveDirection = "";
+				Destroy(gameObject);
 			}
 		}
 		else if(moveDirection == "stop")
