@@ -79,18 +79,19 @@ public class CarController : MonoBehaviour {
 		if(car!=null)
 		{
 
-			if(car.transform.position.x *carMoveScript.isFacingLeft<= carMoveScript.stopPoint)
-			{
 
+						if(car.transform.position.x *carMoveScript.isFacingLeft<= carMoveScript.stopPoint)
+						{
 				if(!isCarSet)
 				{ 
 					setCars();
 					isCarSet = true;
 
 				}
+
 				if(!instructed)
 				{	
-					//DetectInput();
+					DetectInput();
 					DetectKeyboard();
 				}
 					
@@ -114,6 +115,7 @@ public class CarController : MonoBehaviour {
 //		}
 		if (thalmicMyo.pose == Pose.WaveIn /*|| Input.GetKeyDown(KeyCode.LeftArrow)*/ ) //left
 		{
+			carMoveScript.moving = true;
 			instructed = true;
 			moveDirection = "left";
 			if((thalmicMyo.arm.ToString().Equals("Left") && car.name.Equals("CarLeft")) || 
@@ -135,6 +137,7 @@ public class CarController : MonoBehaviour {
 		}
 		if (thalmicMyo.pose == Pose.WaveOut /* || Input.GetKeyDown(KeyCode.RightArrow)*/ ) //right
 		{
+			carMoveScript.moving = true;
 			instructed = true;
 			moveDirection = "right"; 
 			if((thalmicMyo.arm.ToString().Equals("Left") && car.name.Equals("CarLeft")) || 
@@ -156,10 +159,12 @@ public class CarController : MonoBehaviour {
 		}
 		if (thalmicMyo.pose == Pose.FingersSpread) //stop
 		{
+			carMoveScript.moving = false;
 			moveDirection = "stop";
 		}
 		if (thalmicMyo.pose == Pose.Fist) //go straight
 		{
+			carMoveScript.moving = true;
 			instructed = true;
 			/* lets score */
 			if (carMoveScript.goingTo == 2) {
@@ -267,9 +272,11 @@ public class CarController : MonoBehaviour {
 		else if(moveDirection == "stop")
 		{
 
+			print ("stops");
 		}
 		else if(moveDirection == "forward")
 		{
+
 			timer+= Time.deltaTime*turnSpeed;
 			if(timer <3f)
 			{
@@ -305,7 +312,7 @@ public class CarController : MonoBehaviour {
 	void OnCollisionEnter(Collision collider)
 	{
 
-		if(collider.gameObject.name.Contains("Car"))
+		if(collider.gameObject.name.Contains("CarLeft"))
 		{
 			GameController.isGameOver = true;
 		}

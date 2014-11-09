@@ -19,8 +19,8 @@ public class GameController : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		gen_timer_L = 1.0f + Random.Range(0,45)/10f;
-		gen_timer_R = 1.0f + Random.Range(0,45)/10f;
+		gen_timer_L =  Random.Range(5,20)/10f;
+		gen_timer_R =  Random.Range(5,20)/10f;
 	}
 	
 	// Update is called once per frame
