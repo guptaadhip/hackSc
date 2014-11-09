@@ -86,14 +86,20 @@ public class CarController : MonoBehaviour {
 			          );
 		} 
 
-		score.GetComponent<TextMesh>().text = "Score: "+ GameController.score;
+		//if(score.activeSelf)
+			score.GetComponent<TextMesh>().text = "Score: "+ GameController.score;
 	}
 	
 	void Update ()
 	{
 		isInTutorial = false;
+		//score.SetActive(true);
 		if(GameIntro.step<3)
+		{
 			isInTutorial = true;
+			//score.SetActive(false);
+		}
+
 
 		if(currentSwap != gameController.swap)
 		{
@@ -397,7 +403,7 @@ public class CarController : MonoBehaviour {
 	void OnCollisionEnter(Collision collider)
 	{
 
-		if(collider.gameObject.name.Contains("Car") && GameIntro.step>=3)
+		if(collider.gameObject.name.Contains("Car") && GameIntro.step==4)
 		{
 			audio.Stop ();
 			audio.Play();

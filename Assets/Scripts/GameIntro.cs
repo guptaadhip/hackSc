@@ -62,12 +62,12 @@ public class GameIntro : MonoBehaviour {
 		}
 		else if (step == 2)
 		{
-			rules[0].transform.position += new Vector3 (Time.deltaTime*15f, 0,0);
+			rules[0].transform.position += new Vector3 (Time.deltaTime*20f, 0,0);
 			PlayerName.GetComponent<TextMesh>().text = "PLAYER 2";
 		}
 		else if (step == 3)
 		{
-			rules[1].transform.position -= new Vector3 (Time.deltaTime*15f, 0,0);
+			rules[1].transform.position -= new Vector3 (Time.deltaTime*20f, 0,0);
 			PlayerName.GetComponent<TextMesh>().text = "BOTH";
 		}
 
@@ -78,10 +78,10 @@ public class GameIntro : MonoBehaviour {
 			GetComponent<TextMesh>().text = "Game Start!!";
 			transform.position = startPos;
 			timer += Time.deltaTime;
-
+			GameController.score = 0;
 			if(timer>1f)
 			{
-				step =3;
+				step =4;
 				transform.position = endPos;
 				rules[0].SetActive(false);
 				rules[1].SetActive(false);
