@@ -6,9 +6,15 @@ public class GameController : MonoBehaviour {
 	float timer_L = 0.0f;
 	float timer_R = 0.0f;
 	float timer_F = 0.0f;
+	float timer_B = 0.0f;
 	float gen_timer_L = 3.0f;
 	float gen_timer_R = 3.0f;
 	float gen_timer_F = 3.0f;
+	float gen_timer_B = 3.0f;
+
+	float randtimermax = 20.0f;
+
+
 	public static bool isGameOver = false;
 
 	public TextMesh gameStats;
@@ -23,7 +29,9 @@ public class GameController : MonoBehaviour {
 	void Start () {
 		gen_timer_L =  Random.Range(5,20)/10f;
 		gen_timer_R =  Random.Range(5,20)/10f;
-		gen_timer_F =  Random.Range(5,20)/5f;
+
+		gen_timer_F =  Random.Range(5,randtimermax)/5f;
+		gen_timer_B =  Random.Range(5,randtimermax)/5f;
 	}
 	
 	// Update is called once per frame
@@ -32,6 +40,7 @@ public class GameController : MonoBehaviour {
 		timer_L += Time.deltaTime;
 		timer_R += Time.deltaTime;
 		timer_F += Time.deltaTime;
+		timer_B += Time.deltaTime;
 
 		if (timer_L > gen_timer_L) {
 			//gen car
@@ -55,10 +64,23 @@ public class GameController : MonoBehaviour {
 		if (timer_F > gen_timer_F) {
 			//gen car	
 			timer_F = 0f;
-			gen_timer_F = 1.0f + Random.Range(0,45)/5f;
+			gen_timer_F = Random.Range(5,randtimermax)/5f;
+			randtimermax -= Random.Range(0,5)/10f;
+			if(randtimermax < 7.5f) randtimermax = 5.0f;
 			CreatePrefab(2);
 
 		}
+		if (timer_B > gen_timer_B) {
+			//gen car	
+			timer_B = 0f;
+			gen_timer_B = Random.Range(5,randtimermax)/5f;
+			randtimermax -= Random.Range(0,5)/10f;
+			if(randtimermax < 7.5f) randtimermax = 5.0f;
+			CreatePrefab(3);
+			
+		}
+
+
 
 		if(leftCount > 5 || rightCount > 5)
 		{
@@ -82,6 +104,7 @@ public class GameController : MonoBehaviour {
 
 			GameObject clone = Instantiate(carsTypes[type]) as GameObject;
 			clone.name = carsTypes[type].name;
+			print (carsTypes.Length);
 		}
 
 	}

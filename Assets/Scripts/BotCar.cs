@@ -8,20 +8,29 @@ public class BotCar : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		speed = Random.Range(15, 30);
+		speed = Random.Range(40, 45);
 	}
 	
 	// Update is called once per frame
 	void Update () {
-	
-		if(transform.position.z > stopPoint )
-		{
+		if (stopPoint < 0) {
+						if (transform.position.z > stopPoint) {
 			
-			transform.position -= new Vector3(0,0, Time.deltaTime *speed);
-		}
+								transform.position -= new Vector3 (0, 0, Time.deltaTime * speed);
+						} else {
+								Destroy (gameObject);
+						}
+				}
 		else
 		{
-			Destroy(gameObject);
-		}
+			{
+				if (transform.position.z < stopPoint) {
+					
+					transform.position += new Vector3 (0, 0, Time.deltaTime * speed);
+				} else {
+					Destroy (gameObject);
+				}
+			}
+				}
 	}
 }
