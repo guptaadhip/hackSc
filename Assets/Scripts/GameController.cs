@@ -15,6 +15,12 @@ public class GameController : MonoBehaviour {
 	float randtimermax = 20.0f;
 
 
+	int nextlevel = 10;
+	int nextlevelmin = 8;
+	int nextlevelmax = 10;
+
+	int invnum = 0;
+
 	public static bool isGameOver = false;
 
 	public TextMesh gameStats;
@@ -22,6 +28,8 @@ public class GameController : MonoBehaviour {
 	public static int rightCount =1;
 	public static int score = 0;
 
+	float testtimer = 0.0f;
+	public int swap = 0;
 
 	public GameObject[] carsTypes; 
 
@@ -42,10 +50,40 @@ public class GameController : MonoBehaviour {
 		timer_F += Time.deltaTime;
 		timer_B += Time.deltaTime;
 
+		testtimer += Time.deltaTime;
+
+
+		if (score == nextlevel) 
+		{
+			if( invnum == 0)
+			{
+				gameStats.text = "SWAP" ;
+				gameStats.color = Color.magenta;
+				gameStats.gameObject.SetActive(true);
+				testtimer = 0;
+				swap += 1;
+				invnum = 1;
+
+				nextlevelmin -= Random.Range(0,2);
+				if(nextlevelmin<3) nextlevelmin = 3;
+				nextlevelmax -= Random.Range(0,2);
+				if(nextlevelmax<5) nextlevelmax = 5;
+				if(nextlevelmin>nextlevelmax) nextlevelmax = nextlevelmin + 1;
+
+				nextlevel += Random.Range(nextlevelmin,nextlevelmax);
+			}
+		}
+		if(testtimer>2.0f)
+		{
+			gameStats.gameObject.SetActive(false);
+			invnum = 0;
+		}
+
+
 		if (timer_L > gen_timer_L) {
 			//gen car
 			timer_L = 0f;
-			gen_timer_L = 1.0f + Random.Range(0,45)/10f;
+			gen_timer_L = Random.Range(15,45)/10f;
 
 			CreatePrefab(0);
 			leftCount++;
@@ -54,7 +92,7 @@ public class GameController : MonoBehaviour {
 		if (timer_R > gen_timer_R) {
 			//gen car
 			timer_R = 0f;
-			gen_timer_R = 1.0f + Random.Range(0,45)/10f;
+			gen_timer_R = Random.Range(15,45)/10f;
 			
 			CreatePrefab(1);
 			
@@ -65,8 +103,8 @@ public class GameController : MonoBehaviour {
 			//gen car	
 			timer_F = 0f;
 			gen_timer_F = Random.Range(10,randtimermax)/5f;
-			randtimermax -= Random.Range(0,5)/6f;
-			if(randtimermax < 12.5f) randtimermax = 5.0f;
+			randtimermax -= Random.Range(0,5)/7f;
+			if(randtimermax < 12.5f) randtimermax = 12.5f;
 			CreatePrefab(2);
 
 		}
@@ -74,8 +112,8 @@ public class GameController : MonoBehaviour {
 			//gen car	
 			timer_B = 0f;
 			gen_timer_B = Random.Range(10,randtimermax)/5f;
-			randtimermax -= Random.Range(0,5)/6f;
-			if(randtimermax < 12.5f) randtimermax = 5.0f;
+			randtimermax -= Random.Range(0,5)/7f;
+			if(randtimermax < 12.5f) randtimermax = 12.5f;
 			CreatePrefab(3);
 			
 		}
@@ -92,6 +130,7 @@ public class GameController : MonoBehaviour {
 
 		
 			gameStats.text = "Game Over\n Score: " + score;
+			gameStats.color = Color.black;
 			gameStats.gameObject.SetActive(true);
 		}
 

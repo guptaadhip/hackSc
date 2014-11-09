@@ -11,13 +11,17 @@ public class CarController : MonoBehaviour {
 	Quaternion startRot;
 	string moveDirection = "";
 	CarMovement carMoveScript;
+	GameController gameController;
+
 	bool isCarSet = false, instructed = false;
 
 	public float turnSpeed =3f;
 	public GameObject car;
 	public GameObject myo = null;
 
+	int currentSwap = 0;
 
+	 
 	private Pose _lastPose = Pose.Unknown;
 
 	void Start()
@@ -33,6 +37,8 @@ public class CarController : MonoBehaviour {
 			else if(transform.name == "CarLeft")
 				myo = GameObject.Find("Myo1");
 		}
+
+		gameController = GameObject.Find ("Main Camera").GetComponent<GameController> ();
 	}
 
 	void OnGUI ()
@@ -79,6 +85,37 @@ public class CarController : MonoBehaviour {
 	
 	void Update ()
 	{
+		if(currentSwap != gameController.swap)
+		{
+			//print ("swap?" + currentSwap + " <> " + gameController.swap);
+
+			currentSwap = gameController.swap;
+
+
+
+			if(currentSwap%2 == 0)
+			{
+
+				if(transform.name == "CarRight")
+					myo = GameObject.Find("Myo2");
+				else if(transform.name == "CarLeft")
+					myo = GameObject.Find("Myo1");
+			}
+			else
+			{
+				if(transform.name == "CarRight")
+				{
+					myo = GameObject.Find("Myo1");
+					print ("changed");
+				}
+				else if(transform.name == "CarLeft")
+					myo = GameObject.Find("Myo2");
+			}
+
+		}
+
+
+
 		if(car!=null)
 		{
 
@@ -181,7 +218,7 @@ public class CarController : MonoBehaviour {
 	{
 		if (carMoveScript.isFacingLeft != -1) {
 			if ( Input.GetKeyDown (KeyCode.O)) { //left
-				
+				GameController.score++;
 				moveDirection = "left";
 				instructed = true;
 			}
@@ -193,7 +230,7 @@ public class CarController : MonoBehaviour {
 		}
 		else {
 			if ( Input.GetKeyDown (KeyCode.W)) { //left
-				
+				GameController.score++;
 				moveDirection = "left";
 				instructed = true;
 			}

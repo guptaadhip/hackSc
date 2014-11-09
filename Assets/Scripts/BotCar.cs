@@ -8,7 +8,7 @@ public class BotCar : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		speed = Random.Range(40, 45);
+		speed = Random.Range(35, 38);
 	}
 	
 	// Update is called once per frame
