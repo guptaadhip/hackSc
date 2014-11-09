@@ -15,7 +15,7 @@ public class CarMovement : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		speed = Random.Range(10, 20);
+		speed = Random.Range(15, 30);
 
 	}
 
@@ -34,7 +34,7 @@ public class CarMovement : MonoBehaviour {
 		{
 			if(hit.transform.name.Contains(gameObject.transform.name))
 			{
-				if((hit.transform.position.x - transform.position.x)*isFacingLeft <1 )
+				if((hit.transform.position.x - transform.position.x)*isFacingLeft <3.5f )
 				{
 
 					moving = false;

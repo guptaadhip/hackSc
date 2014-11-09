@@ -58,6 +58,7 @@
      <Compile Include="Assets\Myo\Scripts\Myo.NET\libmyo.cs" />
      <Compile Include="Assets\Myo\Scripts\ThalmicHub.cs" />
      <Compile Include="Assets\Myo\Scripts\ThalmicMyo.cs" />
+     <Compile Include="Assets\Scripts\BotCar.cs" />
      <Compile Include="Assets\Scripts\CarController.cs" />
      <Compile Include="Assets\Scripts\CarMovement.cs" />
      <Compile Include="Assets\Scripts\ColorBoxByPose.cs" />

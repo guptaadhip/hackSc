@@ -60,18 +60,21 @@ public class CarController : MonoBehaviour {
 			          "Press Q to try again."
 			          );
 		} else if (!thalmicMyo.isPaired) {
-			GUI.Label(new Rect (12, 8, Screen.width, Screen.height),
+			GUI.Label(new Rect (12, 12, Screen.width, Screen.height),
 			          "No Myo currently paired."
 			          );
 		} else if (!thalmicMyo.armRecognized) {
-			GUI.Label(new Rect (12, 8, Screen.width, Screen.height),
+			GUI.Label(new Rect (12, 16, Screen.width, Screen.height),
 			          "Perform the Sync Gesture."
 			          );
 		} else {
-			GUI.Label (new Rect (12, 8, Screen.width, Screen.height),
+
+			GUI.skin.label.fontSize = 20;
+			GUI.Label (new Rect ( Screen.width -110, 8, Screen.width, Screen.height),
 			           "Score: " + GameController.score
 			           );
 		}
+
 	}
 	
 	void Update ()
@@ -312,7 +315,7 @@ public class CarController : MonoBehaviour {
 	void OnCollisionEnter(Collision collider)
 	{
 
-		if(collider.gameObject.name.Contains("CarLeft"))
+		if(collider.gameObject.name.Contains("Car"))
 		{
 			GameController.isGameOver = true;
 		}
