@@ -67,6 +67,8 @@ public class GameController : MonoBehaviour {
 
 		if(isGameOver)
 		{
+
+		
 			gameStats.text = "Game Over\n Score: " + score;
 			gameStats.gameObject.SetActive(true);
 		}
@@ -77,6 +79,7 @@ public class GameController : MonoBehaviour {
 	{
 		if(!isGameOver)
 		{
+
 			GameObject clone = Instantiate(carsTypes[type]) as GameObject;
 			clone.name = carsTypes[type].name;
 		}

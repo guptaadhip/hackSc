@@ -63,6 +63,7 @@
      <Compile Include="Assets\Scripts\CarMovement.cs" />
      <Compile Include="Assets\Scripts\ColorBoxByPose.cs" />
      <Compile Include="Assets\Scripts\GameController.cs" />
+     <Compile Include="Assets\Scripts\GameIntro.cs" />
      <Compile Include="Assets\Scripts\GenerateSign.cs" />
      <Compile Include="Assets\Scripts\TestMovement.cs" />
      <Compile Include="Assets\Scripts\TestMovement1.cs" />
@@ -85,6 +86,7 @@
      <None Include="Assets\ZRNAssets\license_jp.txt" />
      <None Include="Assets\ZRNAssets\Skyboxes\_skybox info.txt" />
      <None Include="Assets\ZRNAssets\005339_08932_25_14\Shaders\su_Double_and_Clip.shader" />
+     <None Include="Assets\8 Bit Retro Rampage Free\Readme.txt" />
      <None Include="Assets\ZRNAssets\PQAssets\license_jp.txt" />
      <None Include="Assets\ZRNAssets\PQAssets\Query-Chan\Shaders\PQ_TransBlue.shader" />
      <None Include="Assets\Myo\README-MyoUnity.txt" />

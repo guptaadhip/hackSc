@@ -317,6 +317,7 @@ public class CarController : MonoBehaviour {
 
 		if(collider.gameObject.name.Contains("Car"))
 		{
+			//audio.Play();
 			GameController.isGameOver = true;
 		}
 	}

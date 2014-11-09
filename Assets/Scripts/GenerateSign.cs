@@ -22,17 +22,19 @@ public class GenerateSign : MonoBehaviour {
 			switch(i)
 			{
 			case 1:
-				renderer.material.mainTextureScale = new Vector2(-1, -1);
+				//renderer.material.mainTextureScale = new Vector2(-1, -1);
+				renderer.material.mainTexture = textures[0];
 				carMove.goingTo = 1;
 				break;
 			case 2:
-				renderer.material.mainTextureScale = new Vector2(1, 1);
+				//renderer.material.mainTextureScale = new Vector2(1, 1);
+				renderer.material.mainTexture = textures[1];
 				carMove.goingTo = 0;
 				break;
 			case 3:
 
 				carMove.goingTo = 2;
-				renderer.material.mainTexture = textures[1];
+				renderer.material.mainTexture = textures[2];
 				break;
 			}
 			isDirectionSet = true;
