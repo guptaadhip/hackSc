@@ -20,7 +20,7 @@ public class CarController : MonoBehaviour {
 	public GameObject myo = null;
 	public bool isInTutorial = true;
 	public GameObject score ;
-
+	Vector3 scorePos;
 	int currentSwap = 0;
 
 	 
@@ -47,8 +47,9 @@ public class CarController : MonoBehaviour {
 		if(score == null)
 		{
 			score = GameObject.Find("Score");
-		}
 
+		}
+		scorePos = score.transform.position;
 		gameController = GameObject.Find ("Main Camera").GetComponent<GameController> ();
 	}
 
@@ -97,9 +98,13 @@ public class CarController : MonoBehaviour {
 		if(GameIntro.step<3)
 		{
 			isInTutorial = true;
-			//score.SetActive(false);
+			score.transform.position = new Vector3(500, 0, 0); 
 		}
-
+		else if(GameIntro.step==4)
+		{
+			print(scorePos);
+			score.transform.position = new Vector3(9.25f, 13, 24);
+		}
 
 		if(currentSwap != gameController.swap)
 		{
@@ -211,14 +216,14 @@ public class CarController : MonoBehaviour {
 			   (thalmicMyo.arm.ToString().Equals("Right") && car.name.ToString().Equals("CarRight"))) {
 				moveDirection = "right";
 				/* lets score */
-				if (carMoveScript.goingTo == 1) {
+				if (carMoveScript.goingTo == 0) {
 					GameController.score++;
 				}
 			} 
 			else 
 			{
 				/* lets score */
-				if (carMoveScript.goingTo == 0) {
+				if (carMoveScript.goingTo == 1) {
 					GameController.score++;
 				}
 			}
@@ -235,14 +240,14 @@ public class CarController : MonoBehaviour {
 			   (thalmicMyo.arm.ToString().Equals("Right") && car.name.ToString().Equals("CarRight")) ) {
 				moveDirection = "left";
 				/* lets score */
-				if (carMoveScript.goingTo == 0) {
+				if (carMoveScript.goingTo == 1) {
 					GameController.score++;
 				}
 			}
 			else 
 			{
 				/* lets score */
-				if (carMoveScript.goingTo == 1) {
+				if (carMoveScript.goingTo == 0) {
 					GameController.score++;
 				}
 			}
