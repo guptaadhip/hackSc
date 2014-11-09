@@ -28,7 +28,7 @@ public class CarMovement : MonoBehaviour {
 
 	void Move()
 	{
-		//moving = true;
+		moving = true;
 		RaycastHit hit;
 		if (Physics.Raycast(transform.position, -transform.forward , out hit, 5f))
 		{
@@ -41,18 +41,14 @@ public class CarMovement : MonoBehaviour {
 				}
 
 			}
-			else
-			{
-				moving = true;
-			}
 
 		}
 		
-//		if(transform.position.x *isFacingLeft >stopPoint && moving)
-//		{
-		if(moving)
+		if(transform.position.x *isFacingLeft >stopPoint && moving)
+		{
+		
 			transform.position -= new Vector3(Time.deltaTime *isFacingLeft*speed,0, 0);
-//		}
+		}
 //		else if(transform.position.x *isFacingLeft<= stopPoint)
 //		{
 //			//set the controller

@@ -80,8 +80,8 @@ public class CarController : MonoBehaviour {
 		{
 
 
-						if(car.transform.position.x *carMoveScript.isFacingLeft<= carMoveScript.stopPoint)
-						{
+			if(car.transform.position.x *carMoveScript.isFacingLeft<= carMoveScript.stopPoint)
+			{
 				if(!isCarSet)
 				{ 
 					setCars();
@@ -115,7 +115,7 @@ public class CarController : MonoBehaviour {
 //		}
 		if (thalmicMyo.pose == Pose.WaveIn /*|| Input.GetKeyDown(KeyCode.LeftArrow)*/ ) //left
 		{
-			carMoveScript.moving = true;
+			//carMoveScript.moving = true;
 			instructed = true;
 			moveDirection = "left";
 			if((thalmicMyo.arm.ToString().Equals("Left") && car.name.Equals("CarLeft")) || 
@@ -137,7 +137,7 @@ public class CarController : MonoBehaviour {
 		}
 		if (thalmicMyo.pose == Pose.WaveOut /* || Input.GetKeyDown(KeyCode.RightArrow)*/ ) //right
 		{
-			carMoveScript.moving = true;
+			//carMoveScript.moving = true;
 			instructed = true;
 			moveDirection = "right"; 
 			if((thalmicMyo.arm.ToString().Equals("Left") && car.name.Equals("CarLeft")) || 
@@ -159,12 +159,12 @@ public class CarController : MonoBehaviour {
 		}
 		if (thalmicMyo.pose == Pose.FingersSpread) //stop
 		{
-			carMoveScript.moving = false;
+			//carMoveScript.moving = false;
 			moveDirection = "stop";
 		}
 		if (thalmicMyo.pose == Pose.Fist) //go straight
 		{
-			carMoveScript.moving = true;
+			//carMoveScript.moving = true;
 			instructed = true;
 			/* lets score */
 			if (carMoveScript.goingTo == 2) {
