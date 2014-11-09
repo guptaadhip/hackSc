@@ -3,9 +3,11 @@ using System.Collections;
 
 public class CarMovement : MonoBehaviour {
 
-	float speed =3f;
+	float speed =9f;
 	public float stopPoint ;
 	public int isFacingLeft = 1;
+	/* Going To: -1 -> Not Initialized, 0 -> Left, 1-> Right, 2-> Straight */
+	public int goingTo = -1;
 
 	//public CarController controller;
 
@@ -13,7 +15,7 @@ public class CarMovement : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-
+		speed = Random.Range(15, 30);
 
 	}
 
@@ -45,7 +47,7 @@ public class CarMovement : MonoBehaviour {
 		if(transform.position.x *isFacingLeft >stopPoint && moving)
 		{
 
-			transform.position -= new Vector3(Time.deltaTime*3 *isFacingLeft*speed,0, 0);
+			transform.position -= new Vector3(Time.deltaTime *isFacingLeft*speed,0, 0);
 		}
 //		else if(transform.position.x *isFacingLeft<= stopPoint)
 //		{

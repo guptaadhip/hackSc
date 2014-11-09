@@ -11,7 +11,7 @@ public class CarController : MonoBehaviour {
 	Quaternion startRot;
 	string moveDirection = "";
 	CarMovement carMoveScript;
-	bool isCarSet = false;
+	bool isCarSet = false, instructed = false;
 
 	public float turnSpeed =3f;
 	public GameObject car;
@@ -47,7 +47,8 @@ public class CarController : MonoBehaviour {
 		}
 
 		GUI.skin.label.fontSize = 12;
-		
+		GUI.color = Color.black;
+
 		ThalmicHub hub = ThalmicHub.instance;
 		
 		// Access the ThalmicMyo script attached to the Myo object.
@@ -68,7 +69,7 @@ public class CarController : MonoBehaviour {
 			          );
 		} else {
 			GUI.Label (new Rect (12, 8, Screen.width, Screen.height),
-			           "Score: 0"
+			           "Score: " + GameController.score
 			           );
 		}
 	}
@@ -87,8 +88,14 @@ public class CarController : MonoBehaviour {
 					isCarSet = true;
 
 				}
-				DetectInput();
-				MoveCars();
+				if(!instructed)
+				{	
+					//DetectInput();
+					DetectKeyboard();
+				}
+					
+					MoveCars();
+				
 			}
 		}
 	}
@@ -102,26 +109,50 @@ public class CarController : MonoBehaviour {
 			return;
 		}
 		_lastPose = thalmicMyo.pose;
+//		if (thalmicMyo.pose != Pose.Unknown) {
+//			instructed = true;
+//		}
 		if (thalmicMyo.pose == Pose.WaveIn /*|| Input.GetKeyDown(KeyCode.LeftArrow)*/ ) //left
 		{
-
+			instructed = true;
 			moveDirection = "left";
 			if((thalmicMyo.arm.ToString().Equals("Left") && car.name.Equals("CarLeft")) || 
 			   (thalmicMyo.arm.ToString().Equals("Right") && car.name.ToString().Equals("CarRight"))) {
-				print("1");
 				moveDirection = "right";
+				/* lets score */
+				if (carMoveScript.goingTo == 1) {
+					GameController.score++;
+				}
+			} 
+			else 
+			{
+				/* lets score */
+				if (carMoveScript.goingTo == 0) {
+					GameController.score++;
+				}
 			}
-
+		
 		}
 		if (thalmicMyo.pose == Pose.WaveOut /* || Input.GetKeyDown(KeyCode.RightArrow)*/ ) //right
 		{
-
+			instructed = true;
 			moveDirection = "right"; 
 			if((thalmicMyo.arm.ToString().Equals("Left") && car.name.Equals("CarLeft")) || 
 			   (thalmicMyo.arm.ToString().Equals("Right") && car.name.ToString().Equals("CarRight")) ) {
-				print("2");
 				moveDirection = "left";
+				/* lets score */
+				if (carMoveScript.goingTo == 0) {
+					GameController.score++;
+				}
 			}
+			else 
+			{
+				/* lets score */
+				if (carMoveScript.goingTo == 1) {
+					GameController.score++;
+				}
+			}
+
 		}
 		if (thalmicMyo.pose == Pose.FingersSpread) //stop
 		{
@@ -129,7 +160,40 @@ public class CarController : MonoBehaviour {
 		}
 		if (thalmicMyo.pose == Pose.Fist) //go straight
 		{
+			instructed = true;
+			/* lets score */
+			if (carMoveScript.goingTo == 2) {
+				GameController.score++;
+			}
 			moveDirection = "forward";
+		}
+	}
+
+	void DetectKeyboard()
+	{
+		if (carMoveScript.isFacingLeft != -1) {
+			if ( Input.GetKeyDown (KeyCode.O)) { //left
+				
+				moveDirection = "left";
+				instructed = true;
+			}
+			if ( Input.GetKeyDown (KeyCode.M)) { //right
+				
+				moveDirection = "right"; 
+				instructed = true;
+			}
+		}
+		else {
+			if ( Input.GetKeyDown (KeyCode.W)) { //left
+				
+				moveDirection = "left";
+				instructed = true;
+			}
+			if ( Input.GetKeyDown (KeyCode.X)) { //right
+				
+				moveDirection = "right"; 
+				instructed = true;
+			}
 		}
 	}
 
@@ -150,12 +214,21 @@ public class CarController : MonoBehaviour {
 			}
 			else if(timer>=1f && timer<3f)
 			{
-				transform.position += new Vector3(0,0, timer);
+				transform.position += new Vector3(0,0, timer*0.5f);
 			}
 			else if(timer>3f)
 			{
 				moveDirection = "";
+				if(carMoveScript.isFacingLeft == 1)
+				{
+					GameController.leftCount--;
+				}
+				else
+				{
+					GameController.rightCount--;
+				}
 				Destroy(gameObject);
+
 			}
 		}
 		else if(moveDirection == "right")
@@ -171,14 +244,23 @@ public class CarController : MonoBehaviour {
 
 
 				car.transform.rotation = Quaternion.Slerp(startRot, startRot * new Quaternion(0,-0.7f*carMoveScript.isFacingLeft,0,0.7f) , timer);
+
 			}
 			else if(timer>=1f && timer<3f)
 			{
-				transform.position += new Vector3(0,0, -timer);
+				transform.position += new Vector3(0,0, -timer*0.5f);
 			}
 			else if(timer>=3f)
 			{
 				moveDirection = "";
+				if(carMoveScript.isFacingLeft == 1)
+				{
+					GameController.leftCount--;
+				}
+				else
+				{
+					GameController.rightCount--;
+				}
 				Destroy(gameObject);
 			}
 		}
@@ -188,6 +270,25 @@ public class CarController : MonoBehaviour {
 		}
 		else if(moveDirection == "forward")
 		{
+			timer+= Time.deltaTime*turnSpeed;
+			if(timer <3f)
+			{
+				transform.position += new Vector3(-timer*carMoveScript.isFacingLeft,0, 0);
+			} 
+			else  if(timer >= 3f)
+			{
+				moveDirection = "";
+				if(carMoveScript.isFacingLeft == 1)
+				{
+					GameController.leftCount--;
+				}
+				else
+				{
+					GameController.rightCount--;
+				}
+				Destroy(gameObject);
+			}
+
 			
 		}
 	}
@@ -199,5 +300,14 @@ public class CarController : MonoBehaviour {
 		startPos = car.transform.position;
 		startRot = car.transform.rotation;
 
+	}
+
+	void OnCollisionEnter(Collision collider)
+	{
+
+		if(collider.gameObject.name.Contains("Car"))
+		{
+			GameController.isGameOver = true;
+		}
 	}
 }

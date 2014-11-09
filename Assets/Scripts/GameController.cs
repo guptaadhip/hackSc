@@ -7,6 +7,13 @@ public class GameController : MonoBehaviour {
 	float timer_R = 0.0f;
 	float gen_timer_L = 3.0f;
 	float gen_timer_R = 3.0f;
+	public static bool isGameOver = false;
+
+	public TextMesh gameStats;
+	public static int leftCount =1;
+	public static int rightCount =1;
+	public static int score = 0;
+
 
 	public GameObject[] carsTypes; 
 
@@ -33,6 +40,7 @@ public class GameController : MonoBehaviour {
 			CreatePrefab(0);
 
 
+			leftCount++;
 
 
 
@@ -47,17 +55,32 @@ public class GameController : MonoBehaviour {
 			
 			CreatePrefab(1);
 			
+			rightCount++;
 			
 			
 			
-			
+		}
+
+		if(leftCount > 5 || rightCount > 5)
+		{
+			isGameOver = true;
+		}
+
+		if(isGameOver)
+		{
+			gameStats.text = "Game Over\n Score: " + score;
+			gameStats.gameObject.SetActive(true);
 		}
 
 	}
 
 	void CreatePrefab(int type)
 	{
-		GameObject clone = Instantiate(carsTypes[type]) as GameObject;
-		clone.name = carsTypes[type].name;
+		if(!isGameOver)
+		{
+			GameObject clone = Instantiate(carsTypes[type]) as GameObject;
+			clone.name = carsTypes[type].name;
+		}
+
 	}
 }
