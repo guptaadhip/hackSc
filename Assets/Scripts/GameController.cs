@@ -30,8 +30,8 @@ public class GameController : MonoBehaviour {
 		gen_timer_L =  Random.Range(5,20)/10f;
 		gen_timer_R =  Random.Range(5,20)/10f;
 
-		gen_timer_F =  Random.Range(5,randtimermax)/5f;
-		gen_timer_B =  Random.Range(5,randtimermax)/5f;
+		gen_timer_F =  Random.Range(10,randtimermax)/5f;
+		gen_timer_B =  Random.Range(10,randtimermax)/5f;
 	}
 	
 	// Update is called once per frame
@@ -64,18 +64,18 @@ public class GameController : MonoBehaviour {
 		if (timer_F > gen_timer_F) {
 			//gen car	
 			timer_F = 0f;
-			gen_timer_F = Random.Range(5,randtimermax)/5f;
-			randtimermax -= Random.Range(0,5)/10f;
-			if(randtimermax < 7.5f) randtimermax = 5.0f;
+			gen_timer_F = Random.Range(10,randtimermax)/5f;
+			randtimermax -= Random.Range(0,5)/6f;
+			if(randtimermax < 12.5f) randtimermax = 5.0f;
 			CreatePrefab(2);
 
 		}
 		if (timer_B > gen_timer_B) {
 			//gen car	
 			timer_B = 0f;
-			gen_timer_B = Random.Range(5,randtimermax)/5f;
-			randtimermax -= Random.Range(0,5)/10f;
-			if(randtimermax < 7.5f) randtimermax = 5.0f;
+			gen_timer_B = Random.Range(10,randtimermax)/5f;
+			randtimermax -= Random.Range(0,5)/6f;
+			if(randtimermax < 12.5f) randtimermax = 5.0f;
 			CreatePrefab(3);
 			
 		}
