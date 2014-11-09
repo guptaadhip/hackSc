@@ -18,14 +18,21 @@ public class CarController : MonoBehaviour {
 	public float turnSpeed =3f;
 	public GameObject car;
 	public GameObject myo = null;
+	public bool isInTutorial = true;
+	public GameObject score ;
 
 	int currentSwap = 0;
 
 	 
 	private Pose _lastPose = Pose.Unknown;
 
-	void Start()
+	AudioSource audio, audio2;
+	// Use this for initialization
+	void Start () 
 	{
+		audio = gameObject.GetComponent<AudioSource>();
+		//AudioSource aSources[] = GetComponents(AudioSource); audio1 = aSources[0]; audio2 = aSources[1]; 
+
 		if(car!=null)
 		{
 			carMoveScript = car.GetComponent<CarMovement>();
@@ -36,6 +43,10 @@ public class CarController : MonoBehaviour {
 				myo = GameObject.Find("Myo2");
 			else if(transform.name == "CarLeft")
 				myo = GameObject.Find("Myo1");
+		}
+		if(score == null)
+		{
+			score = GameObject.Find("Score");
 		}
 
 		gameController = GameObject.Find ("Main Camera").GetComponent<GameController> ();
@@ -73,18 +84,17 @@ public class CarController : MonoBehaviour {
 			GUI.Label(new Rect (12, 16, Screen.width, Screen.height),
 			          "Perform the Sync Gesture."
 			          );
-		} else {
+		} 
 
-			GUI.skin.label.fontSize = 20;
-			GUI.Label (new Rect ( Screen.width -110, 8, Screen.width, Screen.height),
-			           "Score: " + GameController.score
-			           );
-		}
-
+		score.GetComponent<TextMesh>().text = "Score: "+ GameController.score;
 	}
 	
 	void Update ()
 	{
+		isInTutorial = false;
+		if(GameIntro.step<3)
+			isInTutorial = true;
+
 		if(currentSwap != gameController.swap)
 		{
 			//print ("swap?" + currentSwap + " <> " + gameController.swap);
@@ -129,16 +139,49 @@ public class CarController : MonoBehaviour {
 
 				}
 
-				if(!instructed)
+				if(!instructed && !isInTutorial)
 				{	
 					DetectInput();
 					DetectKeyboard();
 				}
-					
+				if(isInTutorial)
+				{
+					if(carMoveScript.goingTo == 1) {
+						moveDirection = "left";
+					}
+					else if(carMoveScript.goingTo == 2) {
+						moveDirection = "right";
+					}
+					else if(carMoveScript.goingTo == 3) {
+						moveDirection = "forward";
+					}
+				}
 					MoveCars();
 				
 			}
 		}
+	}
+
+	void ProcessInput()
+	{
+		if(moveDirection == "left" && GameIntro.step == 2 )
+		{
+			GameIntro.step++;
+		}
+		else if(moveDirection == "right" && GameIntro.step == 1)
+		{
+			GameIntro.step++;
+
+		}
+	
+		else if(moveDirection == "forward" && GameIntro.step == 3)
+		{
+			GameIntro.step++;
+			isInTutorial = false;
+		}
+	
+
+	
 	}
 
 
@@ -173,6 +216,8 @@ public class CarController : MonoBehaviour {
 					GameController.score++;
 				}
 			}
+
+			audio.Play();
 		
 		}
 		if (thalmicMyo.pose == Pose.WaveOut /* || Input.GetKeyDown(KeyCode.RightArrow)*/ ) //right
@@ -259,7 +304,7 @@ public class CarController : MonoBehaviour {
 			}
 			else if(timer>=1f && timer<3f)
 			{
-				transform.position += new Vector3(0,0, timer*0.5f);
+				transform.position += new Vector3(0,0, timer*0.3f);
 			}
 			else if(timer>3f)
 			{
@@ -293,7 +338,7 @@ public class CarController : MonoBehaviour {
 			}
 			else if(timer>=1f && timer<3f)
 			{
-				transform.position += new Vector3(0,0, -timer*0.5f);
+				transform.position += new Vector3(0,0, -timer*0.3f);
 			}
 			else if(timer>=3f)
 			{
@@ -352,9 +397,10 @@ public class CarController : MonoBehaviour {
 	void OnCollisionEnter(Collision collider)
 	{
 
-		if(collider.gameObject.name.Contains("Car"))
+		if(collider.gameObject.name.Contains("Car") && GameIntro.step>=3)
 		{
-			//audio.Play();
+			audio.Stop ();
+			audio.Play();
 			GameController.isGameOver = true;
 		}
 	}

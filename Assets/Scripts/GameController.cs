@@ -80,43 +80,44 @@ public class GameController : MonoBehaviour {
 		}
 
 
-		if (timer_L > gen_timer_L) {
-			//gen car
-			timer_L = 0f;
-			gen_timer_L = Random.Range(15,45)/10f;
+			if (timer_L > gen_timer_L) {
+				//gen car
+				timer_L = 0f;
+				gen_timer_L = Random.Range(15,45)/10f;
 
-			CreatePrefab(0);
-			leftCount++;
+				CreatePrefab(0);
+				leftCount++;
 
-		}
-		if (timer_R > gen_timer_R) {
-			//gen car
-			timer_R = 0f;
-			gen_timer_R = Random.Range(15,45)/10f;
-			
-			CreatePrefab(1);
-			
-			rightCount++;
+			}
+			if (timer_R > gen_timer_R) {
+				//gen car
+				timer_R = 0f;
+				gen_timer_R = Random.Range(15,45)/10f;
+				
+				CreatePrefab(1);
+				
+				rightCount++;
 
-		}
-		if (timer_F > gen_timer_F) {
-			//gen car	
-			timer_F = 0f;
-			gen_timer_F = Random.Range(10,randtimermax)/5f;
-			randtimermax -= Random.Range(0,5)/7f;
-			if(randtimermax < 12.5f) randtimermax = 12.5f;
-			CreatePrefab(2);
+			}
+			if (timer_F > gen_timer_F) {
+				//gen car	
+				timer_F = 0f;
+				gen_timer_F = Random.Range(10,randtimermax)/5f;
+				randtimermax -= Random.Range(0,5)/7f;
+				if(randtimermax < 12.5f) randtimermax = 12.5f;
+				CreatePrefab(2);
 
-		}
-		if (timer_B > gen_timer_B) {
-			//gen car	
-			timer_B = 0f;
-			gen_timer_B = Random.Range(10,randtimermax)/5f;
-			randtimermax -= Random.Range(0,5)/7f;
-			if(randtimermax < 12.5f) randtimermax = 12.5f;
-			CreatePrefab(3);
-			
-		}
+			}
+			if (timer_B > gen_timer_B) {
+				//gen car	
+				timer_B = 0f;
+				gen_timer_B = Random.Range(10,randtimermax)/5f;
+				randtimermax -= Random.Range(0,5)/7f;
+				if(randtimermax < 12.5f) randtimermax = 12.5f;
+				CreatePrefab(3);
+				
+			}
+		
 
 
 
@@ -129,21 +130,21 @@ public class GameController : MonoBehaviour {
 		{
 
 		
-			gameStats.text = "Game Over\n Score: " + score;
-			gameStats.color = Color.black;
+			gameStats.text = "Game Over";
+			gameStats.color = new Color(0.3f,0,0);
 			gameStats.gameObject.SetActive(true);
 		}
 
 	}
 
-	void CreatePrefab(int type)
+	public void CreatePrefab(int type)
 	{
 		if(!isGameOver)
 		{
 
 			GameObject clone = Instantiate(carsTypes[type]) as GameObject;
 			clone.name = carsTypes[type].name;
-			print (carsTypes.Length);
+
 		}
 
 	}

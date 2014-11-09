@@ -155,7 +155,7 @@ AudioSource:
   m_GameObject: {fileID: 100000}
   m_Enabled: 1
   serializedVersion: 3
-  m_audioClip: {fileID: 8300000, guid: 0dd3689747dfee3419f421373b609ee7, type: 3}
+  m_audioClip: {fileID: 8300000, guid: 4d2bac29ca4ac434596615b1c8439674, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
@@ -248,6 +248,7 @@ MonoBehaviour:
   turnSpeed: 3
   car: {fileID: 100000}
   myo: {fileID: 0}
+  isInTutorial: 1
 --- !u!114 &11400004
 MonoBehaviour:
   m_ObjectHideFlags: 1
