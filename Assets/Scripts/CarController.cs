@@ -155,15 +155,21 @@ public class CarController : MonoBehaviour {
 					DetectInput();
 					DetectKeyboard();
 				}
-				if(isInTutorial)
+				if(GameIntro.step<3)
 				{
-					if(carMoveScript.goingTo == 1) {
+					if(carMoveScript.goingTo == 0) {
 						moveDirection = "left";
+						if(this.gameObject.name.Equals("CarRight"))
+							moveDirection = "right";
+
+					}
+					else if(carMoveScript.goingTo == 1) {
+						moveDirection = "right";
+						if(this.gameObject.name.Equals("CarRight"))
+							moveDirection = "left";
+
 					}
 					else if(carMoveScript.goingTo == 2) {
-						moveDirection = "right";
-					}
-					else if(carMoveScript.goingTo == 3) {
 						moveDirection = "forward";
 					}
 				}
@@ -215,17 +221,40 @@ public class CarController : MonoBehaviour {
 			if((thalmicMyo.arm.ToString().Equals("Left") && car.name.Equals("CarLeft")) || 
 			   (thalmicMyo.arm.ToString().Equals("Right") && car.name.ToString().Equals("CarRight"))) {
 				moveDirection = "right";
+
 				/* lets score */
-				if (carMoveScript.goingTo == 0) {
-					GameController.score++;
+//				if (carMoveScript.goingTo == 1) {
+//					GameController.score++;
+//				}
+				if (car.name.ToString().Equals("CarRight")) {
+					if (carMoveScript.goingTo == 0) {
+						GameController.score++;
+					}
+				} else {
+					if (carMoveScript.goingTo == 1) {
+						GameController.score++;
+					}
 				}
+
 			} 
 			else 
 			{
 				/* lets score */
-				if (carMoveScript.goingTo == 1) {
-					GameController.score++;
+//				if (carMoveScript.goingTo == 0) {
+//					GameController.score++;
+//				}
+				if (car.name.ToString().Equals("CarRight")) {
+					/* lets score */
+					if (carMoveScript.goingTo == 1) {
+						GameController.score++;
+					}
+				} else {
+					/* lets score */
+					if (carMoveScript.goingTo == 0) {
+						GameController.score++;
+					}
 				}
+
 			}
 
 			audio.Play();
@@ -240,15 +269,31 @@ public class CarController : MonoBehaviour {
 			   (thalmicMyo.arm.ToString().Equals("Right") && car.name.ToString().Equals("CarRight")) ) {
 				moveDirection = "left";
 				/* lets score */
-				if (carMoveScript.goingTo == 1) {
-					GameController.score++;
+//				if (carMoveScript.goingTo == 0) {
+//					GameController.score++;
+//				}
+				if (car.name.ToString().Equals("CarRight")) {
+					if (carMoveScript.goingTo == 1) {
+						GameController.score++;
+					}
+				} else {
+					/* lets score */
+					if (carMoveScript.goingTo == 0) {
+						GameController.score++;
+					}
 				}
 			}
 			else 
 			{
-				/* lets score */
-				if (carMoveScript.goingTo == 0) {
-					GameController.score++;
+				if (car.name.ToString().Equals("CarRight")) {
+					/* lets score */
+					if (carMoveScript.goingTo == 0) {
+						GameController.score++;
+					}
+				} else {
+					if (carMoveScript.goingTo == 1) {
+						GameController.score++;
+					}
 				}
 			}
 

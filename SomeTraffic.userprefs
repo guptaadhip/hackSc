@@ -1,12 +1,12 @@
 ﻿<Properties>
-  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/GenerateSign.cs">
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="MonoDevelop.Default" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/GameIntro.cs">
     <Files>
       <File FileName="Assets/Scripts/CarController.cs" Line="226" Column="35" />
       <File FileName="Assets/Scripts/GameIntro.cs" Line="82" Column="16" />
       <File FileName="Assets/Scripts/GenerateSign.cs" Line="36" Column="6" />
-      <File FileName="Assets/Scripts/GameController.cs" Line="134" Column="35" />
-      <File FileName="Assets/Scripts/CarMovement.cs" Line="15" Column="1" />
+      <File FileName="Assets/Scripts/GameController.cs" Line="1" Column="1" />
+      <File FileName="Assets/Scripts/CarMovement.cs" Line="1" Column="1" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
