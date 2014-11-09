@@ -357,7 +357,7 @@ public class CarController : MonoBehaviour {
 		else if(moveDirection == "stop")
 		{
 
-			print ("stops");
+			//print ("stops");
 		}
 		else if(moveDirection == "forward")
 		{

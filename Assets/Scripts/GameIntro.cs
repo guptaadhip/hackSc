@@ -10,6 +10,7 @@ public class GameIntro : MonoBehaviour {
 	public GameObject myo1 = null;
 	public GameObject myo2 = null;
 	public static int step =0;
+	public GameObject PlayerName;
 
 	bool timerOn = true;
 	//public GameObject myo = null;
@@ -27,6 +28,11 @@ public class GameIntro : MonoBehaviour {
 		if(myo1 == null)
 		{
 			myo1 = GameObject.Find("Myo1");
+		}
+
+		if(PlayerName == null)
+		{
+			PlayerName = GameObject.Find("Player");
 		}
 
 	}
@@ -51,11 +57,24 @@ public class GameIntro : MonoBehaviour {
 		if(step == 1)
 		{
 			rules[0].SetActive(true);
-
+			PlayerName.SetActive(true);
+			PlayerName.GetComponent<TextMesh>().text = "PLAYER 1";
+		}
+		else if (step == 2)
+		{
+			rules[0].transform.position += new Vector3 (Time.deltaTime*15f, 0,0);
+			PlayerName.GetComponent<TextMesh>().text = "PLAYER 2";
+		}
+		else if (step == 3)
+		{
+			rules[1].transform.position -= new Vector3 (Time.deltaTime*15f, 0,0);
+			PlayerName.GetComponent<TextMesh>().text = "BOTH";
 		}
 
 		if(step == 5)
 		{
+			rules[2].transform.position += new Vector3 (0, 0,Time.deltaTime*25f);
+			PlayerName.SetActive(false);
 			GetComponent<TextMesh>().text = "Game Start!!";
 			transform.position = startPos;
 			timer += Time.deltaTime;
@@ -64,6 +83,9 @@ public class GameIntro : MonoBehaviour {
 			{
 				step =3;
 				transform.position = endPos;
+				rules[0].SetActive(false);
+				rules[1].SetActive(false);
+				rules[2].SetActive(false);
 			}
 		}
 
@@ -84,25 +106,25 @@ public class GameIntro : MonoBehaviour {
 		//		if (thalmicMyo.pose != Pose.Unknown) {
 		//			instructed = true;
 		//		}
-		if ((thalmicMyo1.pose == Pose.WaveIn || thalmicMyo2.pose == Pose.WaveIn) && GameIntro.step == 2 ) //left
+		if (( thalmicMyo1.pose == Pose.WaveIn) && GameIntro.step == 2 ) //left
 		{
 			GameIntro.step++;
-			rules[1].SetActive(false);
+
 			rules[2].SetActive(true);
 			
 		}
-		if ((thalmicMyo1.pose == Pose.WaveOut ||thalmicMyo2.pose == Pose.WaveOut ) && GameIntro.step == 1) //right
+		if ((thalmicMyo2.pose == Pose.WaveOut  ) && GameIntro.step == 1) //right
 		{
 
 			GameIntro.step++;
-			rules[0].SetActive(false);
+
 			rules[1].SetActive(true);
 		}
 
 		if ((thalmicMyo1.pose == Pose.Fist || thalmicMyo2.pose == Pose.Fist )&& GameIntro.step == 3) //go straight
 		{
 
-			rules[2].SetActive(false);
+
 
 
 
